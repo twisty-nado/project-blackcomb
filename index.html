@@ -22,7 +22,8 @@
             A process or thread crucial to your system operation has unexpectedly exited or been<br>terminated.
             <br>
             <br>
-            If this is the first time you've seen this Stop error screen,<br>restart your computer. If this screen appears
+            If this is the first time you've seen this Stop error screen,<br>restart your computer. If this screen
+            appears
             again, follow<br>these steps:
             <br>
             <br>
@@ -30,8 +31,10 @@
             your hardware or software manufacturer<br>for any Windows updates you might need.
             <br>
             <br>
-            If problems continue, disable or remove any newly installed hardware<br>or software. Disable BIOS memory options
-            such as caching or shadowing.<br>If you need to use Safe Mode to remove or disable components, restart<br>your
+            If problems continue, disable or remove any newly installed hardware<br>or software. Disable BIOS memory
+            options
+            such as caching or shadowing.<br>If you need to use Safe Mode to remove or disable components,
+            restart<br>your
             computer, press F8 to select Advanced Startup Options, and then<br>select Safe Mode.
             <br>
             <br>
@@ -70,21 +73,15 @@
             *** STOP: 0x000000F4 (0x0000000000000003, 0xFFFFFA80018CE7D0, 0xFFFFFA80018CEAB0, 0<br>xFFFFF80002983DB0)
         </span>
     </span>
-    <span class="fakeCursor hidden"></span>
-    <span class="workingarea" onclick="closeStart()">
-        <span class="desktopIcon">
-            <img src="/resources/windows/Icons/imageres_55.ico" draggable="false" height="48px" width="48px">
-            <span class="text">Recycle Bin</span>
+    <span class="bootscreen hidden">
+        <span class="center">
+            <img class="loadanim" src="/resources/windows/animation.webp" draggable="false">
+            <img class="loadimg hidden" src="/resources/windows/animation_static.webp" draggable="false">
+            <span class="loadingtext">Starting Windows</span>
         </span>
-        <span class="desktopIcon">
-            <img src="/resources/windows/Icons/imageres_109.ico" draggable="false" height="48px" width="48px">
-            <span class="text">Computer</span>
-        </span>
-        <span class="desktopIcon" ondblclick="changeWallpaper()">
-            <img src="/resources/windows/Icons/imageres_72.ico" draggable="false" height="48px" width="48px">
-            <span class="text">Wallpaper Swap</span>
-        </span>
+        <span class="credits">© Microsoft Corporation</span>
     </span>
+    <span class="fakeCursor hidden"></span>
     <span class="taskbar">
         <span class="startbutton" onclick="toggleStart()">
             <span class="startbutton-border"></span>
@@ -135,11 +132,11 @@
     </span>
     <span class="build-string">
         <b>
-        ----------------------------------------------------------------
-        <br>
-        <span style="margin-right: 138px;">WARNING</span>
-        <br>
-        ----------------------------------------------------------------
+            ----------------------------------------------------------------
+            <br>
+            <span style="margin-right: 138px;">WARNING</span>
+            <br>
+            ----------------------------------------------------------------
         </b>
         <br>
         This is a very early build of Project Blackcomb
@@ -150,14 +147,34 @@
         <br>
         Twisty Nado - 2026
     </span>
+    <span class="workingarea" onclick="closeStart()">
+        <span class="desktopIcon">
+            <img src="/resources/windows/Icons_7/imageres_55.ico" draggable="false" height="48px" width="48px">
+            <span class="text">Recycle Bin</span>
+        </span>
+        <span class="desktopIcon">
+            <img src="/resources/windows/Icons_7/imageres_109.ico" draggable="false" height="48px" width="48px">
+            <span class="text">Computer</span>
+        </span>
+        <span class="desktopIcon" ondblclick="window.wallpaper();">
+            <img src="/resources/windows/Icons_7/imageres_72.ico" draggable="false" height="48px" width="48px">
+            <span class="text">Wallpaper</span>
+        </span>
+    </span>
+    <span class="winbox focus no-glow brighter volume no-top hidden">
+        <span class="wb-reflection"></span>
+        <span class="wb-glass"></span>
+        <span class="wb-body"></span>
+    </span>
     <script>
         var canBSOD = false;
         var startOpen = false;
         var cursorX = 0;
         var cursorY = 0;
 
-        function changeWallpaper(){
-            document.documentElement.style.setProperty(`--wallpaper`, `url("/resources/wallpapers/Landscapes/img7.jpg")`)
+        function changeWallpaper(img) {
+            console.log(img)
+            document.documentElement.style.setProperty(`--wallpaper`, `url("/resources/wallpapers/${img}")`)
         }
 
         function openStart() {
@@ -215,6 +232,7 @@
 
         function scaleBSOD() {
             const bsod = document.querySelector('.BSOD');
+            const boot = document.querySelector('.bootscreen');
 
             const scaleX = window.innerWidth / 656;
             const scaleY = window.innerHeight / 496;
@@ -222,6 +240,14 @@
             bsod.style.transform = `
                 translate(-50%, -50%)
                 scale(${scaleX}, ${scaleY})
+            `;
+
+            const scaleXB = window.innerWidth / 1024;
+            const scaleYB = window.innerHeight / 768;
+
+            boot.style.transform = `
+                translate(-50%, -50%)
+                scale(${scaleXB}, ${scaleYB})
             `;
         }
 
@@ -264,8 +290,8 @@
                     document.querySelector(".BSOD").classList.remove("hidden")
                     setTimeout(() => {
                         document.querySelector(".BSOD").classList.remove("black")
-                        const rand = getRandomInt(1,4)
-                        if (rand == 1){
+                        const rand = getRandomInt(1, 4)
+                        if (rand == 1) {
                             document.querySelector(".BSODError1").classList.remove("hidden")
                             const bsodPc = document.getElementById("bsodPc");
                             let current = 0;
@@ -317,15 +343,15 @@
             const icons = document.getElementsByClassName("desktopIcon");
             const container = document.querySelector(".workingarea");
             const containerHeight = container.offsetHeight;
-            
+
             let col = 0;
             let row = 0;
             const maxRows = Math.floor(containerHeight / GRID_HEIGHT);
-            
+
             Array.from(icons).forEach(element => {
                 element.style.left = `${col * GRID_WIDTH}px`;
                 element.style.top = `${row * GRID_HEIGHT}px`;
-                
+
                 row++;
                 if (row >= maxRows) {
                     row = 0;
@@ -333,6 +359,36 @@
                 }
             });
         }
+
+        function boot() {
+            var b0 = document.querySelector(".bootscreen")
+            var b1 = document.querySelector(".loadanim")
+            var b2 = document.querySelector(".loadimg")
+
+            b1.classList.remove("hidden")
+            b2.classList.add("hidden")
+
+            b1.src = `/resources/windows/animation.webp?v=${Math.random() * Math.random()}`
+
+            setTimeout(() => {
+                b1.classList.add("hidden")
+                b2.classList.remove("hidden")
+
+                b0.classList.add("black")
+
+                setTimeout(() => {
+                    b0.classList.remove("black")
+                }, 200);
+
+                b2.src = `/resources/windows/animation_static.webp?v=${Math.random() * Math.random()}`
+
+                setTimeout(() => {
+                    b0.classList.add("hidden")
+                }, getRandomInt(2000, 4000));
+            }, 6500);
+        }
+
+        //boot()
 
         window.addEventListener('load', arrangeIconsInGrid);
 
@@ -344,11 +400,11 @@
 
         ds.subscribe('DS:end', ({ items, isDragging }) => {
             if (!isDragging) return;
-            
+
             items.forEach(element => {
                 const currentLeft = parseInt(element.style.left) || 0;
                 const currentTop = parseInt(element.style.top) || 0;
-                
+
                 element.style.left = `${snapToGridX(currentLeft)}px`;
                 element.style.top = `${snapToGridY(currentTop)}px`;
             });
@@ -392,12 +448,306 @@
                 icon: "/resources/windows/AppIcons_PNG/Notepad/16.png",
                 taskbaricon: "/resources/windows/AppIcons_PNG/Notepad/32.png",
                 taskbariconcolor: "#7ebfcd",
-                html: "<textarea style='width: calc(100% - 0px); height: calc(100% - 0px); outline: none; border: none; resize: none;'></textarea>",
+                html: "<textarea style='width: calc(100% - 0px); height: calc(100% - 2px); outline: none; border: none; resize: none;'></textarea>",
                 //header: 60,
                 class: []
             })
         }
+
+        window.wallpaper = function () {
+
+            const rand = getRandomInt(0, 15);
+            if (rand == 7) {
+                setTimeout(() => {
+                    BSOD();
+                }, getRandomInt(50, 250));
+            }
+
+            const box = WinBox.new({
+                title: "Wallpaper",
+                x: "center",
+                y: "center",
+                width: 984,
+                height: 600,
+                minwidth: 400,
+                minweight: 200,
+                icon: "",//"/resources/windows/AppIcons_PNG/Photo/16.png",
+                taskbaricon: "/resources/windows/AppIcons_PNG/Photo/32.png",
+                taskbariconcolor: "#e4feff",
+                mount: document.querySelector(".wallpaperApp").cloneNode(true),
+                //header: 60,
+                class: ["dis-max", "no-resize", "blur-behind", "no-title", "no-top"]
+            });
+
+            setTimeout(() => {
+                const container = box.body.querySelector('.wallpapers');
+                container.innerHTML = '';
+
+                wallpaperData.forEach(section => {
+                    const sectionDiv = document.createElement('span');
+                    sectionDiv.className = 'section';
+
+                    const hr = document.createElement('hr');
+                    const title = document.createElement('h2');
+                    title.textContent = section.section;
+
+                    sectionDiv.appendChild(hr);
+                    sectionDiv.appendChild(title);
+
+                    section.wallpapers.forEach(wallpaper => {
+                        const button = document.createElement('span');
+                        button.className = 'wallpaper';
+                        button.addEventListener('click', () => {
+                            console.log('clicked!', wallpaper.path);
+                            changeWallpaper(wallpaper.path.replace('/resources/wallpapers/', ''));
+                        });
+
+                        const img = document.createElement('img');
+                        img.src = wallpaper.path;
+                        img.width = 128;
+
+                        const span = document.createElement('span');
+                        span.textContent = wallpaper.name;
+
+                        button.appendChild(img);
+                        button.appendChild(span);
+                        sectionDiv.appendChild(button);
+                    });
+
+                    container.appendChild(sectionDiv);
+                });
+            }, 0);
+        }
     </script>
+
+    <script>
+        const wallpaperData = [
+            {
+                "section": "Windows",
+                "wallpapers": [
+                    {
+                        "name": "img0.jpg",
+                        "path": "/resources/wallpapers/Windows/img0.jpg"
+                    }
+                ]
+            },
+            {
+                "section": "Architecture",
+                "wallpapers": [
+                    {
+                        "name": "img13.jpg",
+                        "path": "/resources/wallpapers/Architecture/img13.jpg"
+                    },
+                    {
+                        "name": "img14.jpg",
+                        "path": "/resources/wallpapers/Architecture/img14.jpg"
+                    },
+                    {
+                        "name": "img15.jpg",
+                        "path": "/resources/wallpapers/Architecture/img15.jpg"
+                    },
+                    {
+                        "name": "img16.jpg",
+                        "path": "/resources/wallpapers/Architecture/img16.jpg"
+                    },
+                    {
+                        "name": "img17.jpg",
+                        "path": "/resources/wallpapers/Architecture/img17.jpg"
+                    },
+                    {
+                        "name": "img18.jpg",
+                        "path": "/resources/wallpapers/Architecture/img18.jpg"
+                    }
+                ]
+            },
+            {
+                "section": "Characters",
+                "wallpapers": [
+                    {
+                        "name": "img19.jpg",
+                        "path": "/resources/wallpapers/Characters/img19.jpg"
+                    },
+                    {
+                        "name": "img20.jpg",
+                        "path": "/resources/wallpapers/Characters/img20.jpg"
+                    },
+                    {
+                        "name": "img21.jpg",
+                        "path": "/resources/wallpapers/Characters/img21.jpg"
+                    },
+                    {
+                        "name": "img22.jpg",
+                        "path": "/resources/wallpapers/Characters/img22.jpg"
+                    },
+                    {
+                        "name": "img23.jpg",
+                        "path": "/resources/wallpapers/Characters/img23.jpg"
+                    },
+                    {
+                        "name": "img24.jpg",
+                        "path": "/resources/wallpapers/Characters/img24.jpg"
+                    }
+                ]
+            },
+            {
+                "section": "Landscapes",
+                "wallpapers": [
+                    {
+                        "name": "img10.jpg",
+                        "path": "/resources/wallpapers/Landscapes/img10.jpg"
+                    },
+                    {
+                        "name": "img11.jpg",
+                        "path": "/resources/wallpapers/Landscapes/img11.jpg"
+                    },
+                    {
+                        "name": "img12.jpg",
+                        "path": "/resources/wallpapers/Landscapes/img12.jpg"
+                    },
+                    {
+                        "name": "img7.jpg",
+                        "path": "/resources/wallpapers/Landscapes/img7.jpg"
+                    },
+                    {
+                        "name": "img8.jpg",
+                        "path": "/resources/wallpapers/Landscapes/img8.jpg"
+                    },
+                    {
+                        "name": "img9.jpg",
+                        "path": "/resources/wallpapers/Landscapes/img9.jpg"
+                    }
+                ]
+            },
+            {
+                "section": "Nature",
+                "wallpapers": [
+                    {
+                        "name": "img1.jpg",
+                        "path": "/resources/wallpapers/Nature/img1.jpg"
+                    },
+                    {
+                        "name": "img2.jpg",
+                        "path": "/resources/wallpapers/Nature/img2.jpg"
+                    },
+                    {
+                        "name": "img3.jpg",
+                        "path": "/resources/wallpapers/Nature/img3.jpg"
+                    },
+                    {
+                        "name": "img4.jpg",
+                        "path": "/resources/wallpapers/Nature/img4.jpg"
+                    },
+                    {
+                        "name": "img5.jpg",
+                        "path": "/resources/wallpapers/Nature/img5.jpg"
+                    },
+                    {
+                        "name": "img6.jpg",
+                        "path": "/resources/wallpapers/Nature/img6.jpg"
+                    }
+                ]
+            },
+            {
+                "section": "Scenes",
+                "wallpapers": [
+                    {
+                        "name": "img25.jpg",
+                        "path": "/resources/wallpapers/Scenes/img25.jpg"
+                    },
+                    {
+                        "name": "img26.jpg",
+                        "path": "/resources/wallpapers/Scenes/img26.jpg"
+                    },
+                    {
+                        "name": "img27.jpg",
+                        "path": "/resources/wallpapers/Scenes/img27.jpg"
+                    },
+                    {
+                        "name": "img28.jpg",
+                        "path": "/resources/wallpapers/Scenes/img28.jpg"
+                    },
+                    {
+                        "name": "img29.jpg",
+                        "path": "/resources/wallpapers/Scenes/img29.jpg"
+                    },
+                    {
+                        "name": "img30.jpg",
+                        "path": "/resources/wallpapers/Scenes/img30.jpg"
+                    }
+                ]
+            },
+            {
+                "section": "Extras",
+                "wallpapers": [
+                    {
+                        "name": "extra1.png",
+                        "path": "/resources/wallpapers/Extras/extra1.png"
+                    }
+                ]
+            }
+        ];
+
+        function loadWallpapers() {
+            const container = document.querySelector('.backstore .wallpaperApp .wallpapers');
+            container.innerHTML = '';
+
+            wallpaperData.forEach(section => {
+                const sectionDiv = document.createElement('span');
+                sectionDiv.className = 'section';
+
+                const hr = document.createElement('hr');
+                const title = document.createElement('h2');
+                title.textContent = section.section;
+
+                sectionDiv.appendChild(hr);
+                sectionDiv.appendChild(title);
+
+                section.wallpapers.forEach(wallpaper => {
+                    const button = document.createElement('button');
+                    button.className = 'wallpaper';
+                    button.addEventListener('click', () => {
+                        console.log('clicked!', wallpaper.path);
+                        changeWallpaper(wallpaper.path.replace('/resources/wallpapers/', ''));
+                    });
+
+                    const img = document.createElement('img');
+                    img.src = wallpaper.path;
+                    img.width = 128;
+
+                    const span = document.createElement('span');
+                    span.textContent = wallpaper.name;
+
+                    button.appendChild(img);
+                    button.appendChild(span);
+                    sectionDiv.appendChild(button);
+                });
+
+                container.appendChild(sectionDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadWallpapers);
+    </script>
+
+    <span class="backstore hidden">
+        <span class="wallpaperApp">
+            <h2>Change your wallpaper</h2>
+            <p>Use this utility to change your user desktop background</p>
+            <span class="wallpapers">
+                <!--
+                <span class="section">
+                    <hr>
+                    <h2>Windows</h2>
+                    <button class="wallpaper" onclick="changeWallpaper('/Windows/img0.jpg')">
+                        <img src="/resources/wallpapers/Windows/img0.jpg" width="128">
+                        <span>img0.jpg</span>
+                    </button>
+                </span>
+                -->
+            </span>
+            <hr>
+        </span>
+    </span>
 </body>
 
 </html>

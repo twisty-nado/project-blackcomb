@@ -638,7 +638,7 @@ function addWindowListener(self, dir){
                 return;
             }
 
-            if(!self.hasClass("no-max")){
+            if(!self.hasClass("no-max") && !self.hasClass("dis-max")){
 
                 const now = Date.now();
                 const diff = now - dblclick_timer;
@@ -1200,18 +1200,35 @@ WinBox.prototype.maximize = function(state){
 
     if(!this.max){
 
-        this.addClass("max").resize(
+        var taskbar = getByClass(document.body, "taskbar");
 
-            root_w - this.left - this.right,
-            root_h - this.top - this.bottom - 40,
-            true
+        if (hasClass(taskbar, "small")){
+            this.addClass("max").resize(
 
-        ).move(
+                root_w - this.left - this.right,
+                root_h - this.top - this.bottom - 30,
+                true
 
-            this.left,
-            this.top,
-            true
-        );
+            ).move(
+
+                this.left,
+                this.top,
+                true
+            );
+        } else {
+            this.addClass("max").resize(
+
+                root_w - this.left - this.right,
+                root_h - this.top - this.bottom - 40,
+                true
+
+            ).move(
+
+                this.left,
+                this.top,
+                true
+            );
+        }
 
         this.max = true;
         this.onmaximize && this.onmaximize();

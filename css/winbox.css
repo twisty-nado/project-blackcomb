@@ -44,6 +44,10 @@
 
 }
 
+.winbox.brighter{
+     backdrop-filter: blur(4px) saturate(50%) brightness(100%) contrast(150%);
+}
+
 .wb-reflection{
      position: absolute;
      width: 100%;
@@ -55,6 +59,10 @@
      /*background-repeat: repeat;
      background-attachment: fixed;*/
      background-size: 160%;
+}
+
+.winbox.no-glow .wb-reflection, .winbox.no-glow .wb-reflection::before, .winbox.no-glow .wb-reflection::after{
+     background: none;
 }
 
 .wb-glass{
@@ -166,7 +174,6 @@
      contain: strict;
      z-index: 0;
      box-sizing: border-box;
-     overflow: hidden;
 }
 
 /* body > .wb-body{
@@ -195,6 +202,10 @@
      box-sizing: border-box;
      text-shadow: 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff;
      z-index: 1;
+}
+
+.no-title .wb-title{
+     visibility: hidden;
 }
 
 .wb-icon {
@@ -669,7 +680,7 @@ body.wb-lock iframe {
 
 .no-top .wb-body{
      top: 0;
-     margin: 4px !important
+     margin: 6px !important
 }
 
 .no-animation {

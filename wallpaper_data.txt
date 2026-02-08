@@ -1,0 +1,165 @@
+const wallpaperData = [
+    {
+        "section": "Architecture",
+        "wallpapers": [
+            {
+                "name": "img13.jpg",
+                "path": "/resources/wallpapers/Architecture/img13.jpg"
+            },
+            {
+                "name": "img14.jpg",
+                "path": "/resources/wallpapers/Architecture/img14.jpg"
+            },
+            {
+                "name": "img15.jpg",
+                "path": "/resources/wallpapers/Architecture/img15.jpg"
+            },
+            {
+                "name": "img16.jpg",
+                "path": "/resources/wallpapers/Architecture/img16.jpg"
+            },
+            {
+                "name": "img17.jpg",
+                "path": "/resources/wallpapers/Architecture/img17.jpg"
+            },
+            {
+                "name": "img18.jpg",
+                "path": "/resources/wallpapers/Architecture/img18.jpg"
+            }
+        ]
+    },
+    {
+        "section": "Characters",
+        "wallpapers": [
+            {
+                "name": "img19.jpg",
+                "path": "/resources/wallpapers/Characters/img19.jpg"
+            },
+            {
+                "name": "img20.jpg",
+                "path": "/resources/wallpapers/Characters/img20.jpg"
+            },
+            {
+                "name": "img21.jpg",
+                "path": "/resources/wallpapers/Characters/img21.jpg"
+            },
+            {
+                "name": "img22.jpg",
+                "path": "/resources/wallpapers/Characters/img22.jpg"
+            },
+            {
+                "name": "img23.jpg",
+                "path": "/resources/wallpapers/Characters/img23.jpg"
+            },
+            {
+                "name": "img24.jpg",
+                "path": "/resources/wallpapers/Characters/img24.jpg"
+            }
+        ]
+    },
+    {
+        "section": "Extras",
+        "wallpapers": [
+            {
+                "name": "extra1.png",
+                "path": "/resources/wallpapers/Extras/extra1.png"
+            }
+        ]
+    },
+    {
+        "section": "Landscapes",
+        "wallpapers": [
+            {
+                "name": "img10.jpg",
+                "path": "/resources/wallpapers/Landscapes/img10.jpg"
+            },
+            {
+                "name": "img11.jpg",
+                "path": "/resources/wallpapers/Landscapes/img11.jpg"
+            },
+            {
+                "name": "img12.jpg",
+                "path": "/resources/wallpapers/Landscapes/img12.jpg"
+            },
+            {
+                "name": "img7.jpg",
+                "path": "/resources/wallpapers/Landscapes/img7.jpg"
+            },
+            {
+                "name": "img8.jpg",
+                "path": "/resources/wallpapers/Landscapes/img8.jpg"
+            },
+            {
+                "name": "img9.jpg",
+                "path": "/resources/wallpapers/Landscapes/img9.jpg"
+            }
+        ]
+    },
+    {
+        "section": "Nature",
+        "wallpapers": [
+            {
+                "name": "img1.jpg",
+                "path": "/resources/wallpapers/Nature/img1.jpg"
+            },
+            {
+                "name": "img2.jpg",
+                "path": "/resources/wallpapers/Nature/img2.jpg"
+            },
+            {
+                "name": "img3.jpg",
+                "path": "/resources/wallpapers/Nature/img3.jpg"
+            },
+            {
+                "name": "img4.jpg",
+                "path": "/resources/wallpapers/Nature/img4.jpg"
+            },
+            {
+                "name": "img5.jpg",
+                "path": "/resources/wallpapers/Nature/img5.jpg"
+            },
+            {
+                "name": "img6.jpg",
+                "path": "/resources/wallpapers/Nature/img6.jpg"
+            }
+        ]
+    },
+    {
+        "section": "Scenes",
+        "wallpapers": [
+            {
+                "name": "img25.jpg",
+                "path": "/resources/wallpapers/Scenes/img25.jpg"
+            },
+            {
+                "name": "img26.jpg",
+                "path": "/resources/wallpapers/Scenes/img26.jpg"
+            },
+            {
+                "name": "img27.jpg",
+                "path": "/resources/wallpapers/Scenes/img27.jpg"
+            },
+            {
+                "name": "img28.jpg",
+                "path": "/resources/wallpapers/Scenes/img28.jpg"
+            },
+            {
+                "name": "img29.jpg",
+                "path": "/resources/wallpapers/Scenes/img29.jpg"
+            },
+            {
+                "name": "img30.jpg",
+                "path": "/resources/wallpapers/Scenes/img30.jpg"
+            }
+        ]
+    },
+    {
+        "section": "Windows",
+        "wallpapers": [
+            {
+                "name": "img0.jpg",
+                "path": "/resources/wallpapers/Windows/img0.jpg"
+            }
+        ]
+    }
+];

@@ -63,7 +63,7 @@
     left: 0;
     bottom: 0;
     z-index: 1000000001;
-    overflow: hidden;
+    overflow: visible;
     backdrop-filter: blur(3px) saturate(50%) brightness(75%) contrast(150%);
 }
 
@@ -632,6 +632,7 @@
     font-size: 9pt;
     text-rendering: optimizeSpeed;
     border: solid 8px #000;
+    box-shadow: 0 0 0 40px #000;
     image-rendering: pixelated;
     cursor: none;
     pointer-events: all !important;
@@ -691,6 +692,85 @@
     border-image: url("/resources/windows/item-sel-bg.png") 3 fill stretch !important;
 }
 
+.taskbar.small{
+    height: 30px;
+}
+
+.taskbar.small .time{
+    line-height: 28px;
+    margin-top: 0px;
+}
+
+.taskbar.small .startbutton{
+    top: -10px
+}
+
+.taskbar.small ~ .startmenu{
+    bottom: 30px;
+}
+
+.taskbar.small ~ .workingarea{
+    height: calc(100% - 35px);
+}
+
+.volume{
+    position: absolute;
+    left: unset;
+    top: unset;
+    right: 48px;
+    bottom: 48px;
+    min-width: 0;
+    min-height: 0;
+    width: 84px;
+    height: 305px;
+    transform: perspective(100px);
+}
+
+.bootscreen{
+    width: 1024px;
+    height: 768px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #000;
+    color: #fff;
+    font-size: 0pt;
+    box-shadow: 0 0 0 40px #000;
+    z-index: 9999999999;
+    cursor: none;
+}
+
+.bootscreen .loadingtext{
+    font-size: 18pt;
+}
+
+.bootscreen .credits{
+    font-size: 11.25pt;
+    color: #787878;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 36px;
+}
+
+.bootscreen .center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.bootscreen .center *{
+    display: block;
+}
+
+.bootscreen.black{
+    filter: brightness(0);
+}
+
 /*
 .ds-selector{
     border: none !important;
@@ -701,9 +781,71 @@
 
 /* #endregion */
 
+/* #region apps */
+
+.wallpaperApp{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    padding: 24px;
+    overflow-y: visible;
+    text-shadow: 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff;
+}
+
+.wallpaperApp h2{
+    font-weight: 400;
+    font-size: 11.25pt;
+    color: #0033AB;
+    margin: 0;
+}
+
+.wallpaperApp .wallpaper{
+    text-align: center;
+    display: inline-block;
+    padding: 8px;
+    margin: 4px;
+}
+
+.wallpaperApp .wallpaper img{
+    image-rendering: auto;
+    box-shadow: 0 0 0 1px #ffffff77, 0 0 0 2px #00000033, 0 0 12px 4px #ffffffdd;
+    border-radius: 3px;
+}
+
+.wallpaperApp .wallpaper span{
+    margin: 0;
+    margin-top: 4px;
+    display: block;
+    font-size: 9pt;
+}
+
+.wallpaperApp .section h2{
+    margin-bottom: 6px;
+}
+
+.wallpaperApp hr{
+    opacity: 1;
+    border: none;
+    height: 1px;
+    box-shadow:  0 2px 2px 0 #ffffffdd, 0 1px 0 0 #0033AB88;
+}
+
+/* #endregion */
+
 :root{
     cursor: url("/resources/windows/Cursor/aero_arrow.png"), auto;
-    --wallpaper: url("/resources/wallpapers/Windows/img0.jpg")
+    --wallpaper: url("/resources/wallpapers/Extras/extra1.png"); /*url("/resources/wallpapers/Windows/img0.jpg")*/
+}
+
+textarea{
+    cursor: auto;
+}
+
+*{
+    cursor: url("/resources/windows/Cursor/aero_arrow.png"), auto;
 }
 
 body, html{
@@ -728,5 +870,5 @@ body{
 }
 
 .hidden{
-    display: none;
+    display: none !important;
 }
