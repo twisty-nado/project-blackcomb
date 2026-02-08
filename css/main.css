@@ -1,0 +1,720 @@
+@font-face {
+    font-family: "Segoe UI Vista";
+    src: url("/resources/fonts/segoeui.ttf");
+}
+
+@font-face {
+    font-family: "Consolas Vista";
+    src: url("/resources/fonts/consolas.ttf");
+}
+
+/* #region windows stuff */
+
+@keyframes appOpen{
+    0%{
+        width: 0;
+    }
+}
+
+@keyframes appOpenImg{
+    0%{
+        opacity: 0;
+    }
+}
+
+:root{
+    --glass-effect: linear-gradient(54deg,#0002 0 4%,#6661 6% 6%,#0002 8% 10%,#0002 15% 16%,#aaa1 17% 18%,#0002 23% 24%,#bbb2 25% 26%,#0002 31% 33%,#0002 34% 34.5%,#bbb2 36% 40%,#0002 41% 41.5%,#bbb2 44% 45%,#bbb2 46% 47%,#0002 48% 49%,#0002 50% 50.5%,#0002 56% 56.5%,#bbb2 57% 63%,#0002 67% 69%,#bbb2 69.5% 70%,#0002 73.5% 74%,#bbb2 74.5% 79%,#0002 80% 84%,#aaa2 85% 86%,#0002 87%,#bbb1 90%) left center/100vw 100vh no-repeat fixed;
+    --glass-color: #40A3FF;
+    --glass-intensity: 0.2;
+    --inactive-glass-intensity: 0.1;
+}
+
+.taskbar::before{
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--glass-color);
+    opacity: var(--glass-intensity);
+}
+
+.taskbar::after{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*background: linear-gradient(#767676c7 0%, #323232c7 50%, #000000bc 50%, #000000c2 100%);
+    box-shadow: 0 1px 0 #474747e5 inset, 0 2px 0 #9e9e9ee5 inset, 0 -1px 0 #000 inset;*/
+    background: url("/resources/windows/taskbar.png");
+    opacity: 0.6;
+    background-size: 1200px 40px;
+}
+
+.taskbar{
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1000000001;
+    overflow: hidden;
+    backdrop-filter: blur(3px) saturate(50%) brightness(75%) contrast(150%);
+}
+
+.taskbaricons{
+    position: absolute;
+    left: 60px;
+    top: 0;
+    width: calc(100% - 120px);
+    height: 100%;
+    overflow: hidden;
+    overflow-y: hidden;
+}
+
+.quicklaunch{
+    display: inline-block;
+    height: 100%;
+    font-size: 0;
+}
+
+.quicklaunchapp{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 100%;
+    background: transparent;
+    margin-right: 2px;
+}
+
+.quicklaunchapp:hover{
+    background: url("/resources/windows/TaskBand2_TASKITEM_1014.png") 0 80px;
+}
+
+.quicklaunchapp:active{
+    background: url("/resources/windows/TaskBand2_TASKITEM_1014.png") 0 40px;
+}
+
+.quicklaunchapp img{
+    width: 32px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.taskbaricon{
+    position: relative;
+    width: 60px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    background: url("/resources/windows/TaskBand2_TASKITEM_1014.png") 0 0;
+    /*background-size: 100% 174px;*/
+    overflow: hidden;
+    margin-right: 2px;
+}
+
+.taskbaricon img{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.taskbaricon.open img{
+    animation: appOpenImg 0.3s linear;
+}
+
+.taskbaricon img ~ .taskbaricontext{
+    padding-left: 6px;
+}
+
+.taskbaricon::before{
+    content: "";
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    left: 1px;
+    top: 1px;
+    border-radius: 2px;
+    position: absolute;
+    overflow: hidden;
+    box-shadow: inset 0 -8px 24px -4px;
+    filter: brightness(0.75) saturate(2) contrast(2);
+    opacity: 0;
+}
+
+.taskbaricon:hover::before{
+    opacity: 0.75;
+}
+
+.taskbaricon.focus{
+    background: url("/resources/windows/TaskBand2_TASKITEM_1014.png") 0 -120px;
+}
+
+.taskbaricon.open{
+    animation: appOpen 0.3s linear;
+}
+
+.taskbaricontext{
+    color: #ffffff;
+    font-size: 9pt;
+    padding-left: 8px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+}
+
+.startbutton{
+    position: relative;
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    background: url("/resources/windows/WindowsStartButtonSmall.png") 0 -6px;
+}
+
+.startbutton-border{
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    left: 8px;
+    top: 2px;
+    box-shadow: inset 0 0 0 1px #ffffff58;
+    border-radius: 100%;
+}
+
+.startbutton:hover::before{
+    opacity: 1;
+}
+
+.startbutton.active.startbutton::after{
+    opacity: 1;
+}
+
+.startbutton.active.startbutton::before{
+    opacity: 0;
+    transition: none;
+}
+
+.startbutton::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    pointer-events: none;
+    background: url("/resources/windows/WindowsStartButtonSmall.png") 0 -60px no-repeat;
+    opacity: 0;
+    z-index: 1;
+    transition: 1s;
+}
+
+.startbutton::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    pointer-events: none;
+    background: url("/resources/windows/WindowsStartButtonSmall.png") 0 -114px no-repeat;
+    opacity: 0;
+    z-index: 2;
+}
+
+.build-string{
+    position: absolute;
+    bottom: 40px;
+    right: 0px;
+    text-align: right;
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.right{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: fit-content;
+    height: 100%;
+    background: #00000050;
+    margin-top: 2px;
+}
+
+.right::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 48px;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, #00000050);
+    content: "";
+}
+
+.right *{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.time{
+    position: relative;
+    line-height: 17px;
+    color: #fff;
+    font-size: 9pt;
+    margin-right: 1px;
+    margin-top: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-align: center;
+}
+
+.show-desktop{
+    width: 17px;
+    height: 100%;
+    margin-top: -2px;
+    background: url("/resources/windows/ShowDesktop--Button_Common\ Properties_1107.png");
+}
+
+.startmenu::before{
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--glass-color);
+    opacity: var(--glass-intensity);
+    border-radius: 6px 6px 2px 2px;
+}
+
+.startmenu::after{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.10) linear-gradient(180deg, transparent, #00000077 40%, transparent);
+    box-shadow: 0 0 0 1px #000000c0 inset, 0 0 0 2px #ffffff50 inset;
+    border-radius: 6px 6px 0 0;
+}
+
+.startmenu{
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    backdrop-filter: blur(3px) saturate(50%) brightness(75%) contrast(150%);
+    width: 406px;
+    height: 534px;
+    border-radius: 6px 6px 2px 2px;
+    box-shadow: 2px 2px 4px #00000077;
+    z-index: 1000000000;
+}
+
+.startleft{
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    width: 254px;
+    height: calc(100% - 14px);
+    background: #fefefe;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #dddddd77 inset, 0 0 0 2px #00000099 inset;
+    box-sizing: border-box;
+    padding-top: 2px;
+    color: #282828;
+}
+
+.startright{
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    width: 133px;
+    height: calc(100% - 14px);
+    box-sizing: border-box;
+    padding-top: 44px;
+    color: #f1f1f1;
+}
+
+.startmenu .bottom{
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: 42px;
+    border-radius: 0 0 4px 4px;
+    background: linear-gradient(180deg, #E8EEF7 0%, #EFF3F8 100%);
+    box-shadow: inset 0px 2px 1px #CCD9EA;
+}
+
+.startsearch{
+    position: absolute;
+    left: 19px;
+    bottom: 17px;
+    background: #fefefe;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px #00000077 inset;
+    width: calc(254px - 24px);
+    height: 24px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    padding: 0;
+    padding-left: 6px;
+    font-size: 9pt;
+    font-family: "Segoe UI Vista";
+    line-height: 24px;
+    font-style: italic;
+    color: #575757;
+    cursor: text;
+}
+
+.startsearch::after{
+    content: "";
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 13px;
+    height: 13px;
+    background: url("/resources/windows/image 290791.png");
+}
+
+.startapp{
+    display: block;
+    width: calc(100% - 8px);
+    height: 36px;
+    line-height: 36px;
+    box-sizing: border-box;
+    padding-left: 42px;
+    font-size: 9pt;
+    margin: 4px;
+    margin-top: 2px;
+    margin-bottom: 0;
+    border-radius: 3px;
+}
+
+.startapp img{
+    vertical-align: top;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: 8px;
+    top: 6px;
+}
+
+.startapp:hover{
+    background: linear-gradient(180deg, #E9F7FE 0%, #C5E9FB 100%);
+    box-shadow: inset 0px 0px 0px 1px #B7E7FC, inset 0px 0px 0px 2px #DFF2FD;
+}
+
+.startlink{
+    display: block;
+    width: 133px;
+    height: 33px;
+    line-height: 33px;
+    box-sizing: border-box;
+    padding-left: 12px;
+    font-size: 9pt;
+    margin: 0;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.startlink:hover{
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(36, 36, 36, 0) 50%, rgba(30, 30, 30, 0) 50.01%, rgba(30, 30, 30, 0) 100%);
+    box-shadow: 0 0 0 1px #ffffff77 inset, 0 0 0 3px #ffffff33 inset, 0 0 0 2px #00000077 inset;
+}
+
+.startlink.more::before{
+    position: absolute;
+    right: 8px;
+    top: 12px;
+    width: 4px;
+    height: 7px;
+    background: url("/resources/windows/more_link.png");
+    content: "";
+}
+
+.userprofile{
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: url("/resources/windows/user-frame.png");
+}
+
+.userimage{
+    background: url("/resources/windows/userprofiles/win7.png") center center no-repeat;
+    background-size: 100%;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    border-radius: 2px;
+}
+
+.workingarea{
+    width: 100%;
+    height: calc(100% - 45px);
+    position: absolute;
+    left: 0;
+    top: 5px;
+    z-index: 2;
+}
+
+.startright hr{
+    width: 126px;
+    height: 2px;
+    border: none;
+    position: relative;
+    margin: 4px;
+}
+
+.startright hr::before{
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    background: #171819;
+    box-shadow: 0 1px 0 #858789;
+    opacity: 0.3;
+}
+
+.shutdown{
+    position: absolute;
+    width: 130px;
+    height: 24px;
+    bottom: 12px;
+    right: 0px;
+    font-size: 0px;
+}
+
+.shutdown > span{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    width: 52px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(30, 30, 30, 0) 50.01%, rgba(255, 255, 255, 0.05) 100%);
+    box-shadow: 0 0 0 1px #00000099 inset, 0 0 0 2px #ffffff70 inset;
+    z-index: 2;
+}
+
+.shutdown .standby::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    content: "";
+    border-radius: 3px 0 0 3px;
+    z-index: -1;
+    box-sizing: border-box;
+    background: radial-gradient(50% 172.25% at 0% 50%, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(50% 172.25% at 100% 50%, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, #A59C65 0%, #6B6B50 50%, #443E1E 50.01%, #595518 100%);
+    filter: brightness(0.95) contrast(1.1);
+    box-shadow: 0 0 0 1px #dddddd33 inset;
+    margin: 2px;
+}
+
+.shutdown .shut{
+    border-radius: 3px 0 0 3px;
+    width: 73px;
+    font-size: 9pt;
+    text-align: center;
+    line-height: 24px;
+}
+
+.shutdown .standby{
+    border-radius: 3px 0 0 3px;
+    background: transparent;
+}
+
+.shutdown .standby::before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("/resources/windows/standby.png") center no-repeat;
+}
+
+.shutdown .lock{
+    margin-left: -1px;
+}
+
+.shutdown .lock::before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("/resources/windows/lock.png") center no-repeat;
+}
+
+.shutdown .more{
+    margin-left: -1px;
+    width: 24px;
+    border-radius: 0 4px 4px 0;
+}
+
+.shutdown .more::before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("/resources/windows/more_shut.png") center no-repeat;
+}
+
+.frozen * {
+  pointer-events: none !important;
+  animation-play-state: paused !important;
+  transition: none !important;
+  cursor: none !important;
+}
+
+.frozen {
+    cursor: none !important;
+}
+
+.fakeCursor{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 1000000002;
+    image-rendering: pixelated;
+    pointer-events: none;
+    background: url("/resources/windows/Cursor/aero_arrow.png");
+}
+
+.BSOD{
+    position: absolute;
+    width: 656px;
+    height: 496px;
+    box-sizing: border-box;
+    left: 50%;
+    top: 50%;
+    background: #000080;
+    color: #fff;
+    font-family: "Consolas Vista";
+    z-index: 1000000003;
+    font-size: 9pt;
+    text-rendering: optimizeSpeed;
+    border: solid 8px #000;
+    image-rendering: pixelated;
+    cursor: none;
+    pointer-events: all !important;
+    overflow: hidden;
+}
+
+.BSOD.black{
+    color: #000;
+    background: #000;
+}
+
+.BSOD br{
+    
+}
+
+.desktopIcon{
+    position: absolute;
+    width: 76px;
+    min-height: 70px;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 0;
+}
+
+.desktopIcon .text{
+    position: absolute;
+    display: block;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    width: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9pt;
+    text-shadow: 1px 1px 3px #000, 1px 1px 3px #000, 1px 1px 3px #000, 0px 0px 1px #000, 1px 1px 3px #00000033;
+}
+
+.ds-selector-area{
+    z-index: 1 !important;
+}
+
+.ds-selector{
+    background: #0078d766 !important;
+    border: 1px solid #0078D4 !important;
+}
+
+.ds-selectable{
+    border: 3px solid transparent;
+}
+
+.ds-selectable:hover{
+    border-image: url("/resources/windows/item-hot-bg.png") 3 fill stretch;
+}
+
+.ds-selected{
+    border-image: url("/resources/windows/item-sel-bg.png") 3 fill stretch !important;
+}
+
+/*
+.ds-selector{
+    border: none !important;
+    background: #77abdf33 !important;
+    box-shadow: inset 0px 0px 1px 1px #0068F080 !important;
+}
+*/
+
+/* #endregion */
+
+:root{
+    cursor: url("/resources/windows/Cursor/aero_arrow.png"), auto;
+}
+
+body, html{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    font-family: "Segoe UI Vista", sans-serif;
+    user-select: none;
+    font-size: 9pt;
+    overflow: hidden;
+    background: #000;
+}
+
+body{
+    background: #000 url("/resources/wallpapers/Windows/img0.jpg") center center no-repeat;
+    background-size: cover;
+    color: #282828;
+}
+
+.hidden{
+    display: none;
+}

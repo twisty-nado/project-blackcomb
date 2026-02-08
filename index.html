@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Blackcomb [TEST]</title>
+    <link rel="stylesheet" href="css/winbox.css?v=1">
+    <link rel="stylesheet" href="css/main.css?v=1">
+    <link rel="stylesheet" href="css/7.css?v=1">
+    <link rel="shortcut icon" href="/resources/windows/image 290800.png" type="image/x-icon">
+    <script src="/js/ds.min.js"></script>
+</head>
+
+<body onmousemove="updateCursorPos(event)">
+    <span class="BSOD black hidden">
+        <span class="BSODError1 hidden">
+            A problem has been detected and Windows has been shut down to prevent damage<br>to your computer.
+            <br>
+            <br>
+            <br>
+            A process or thread crucial to your system operation has unexpectedly exited or been<br>terminated.
+            <br>
+            <br>
+            If this is the first time you've seen this Stop error screen,<br>restart your computer. If this screen appears
+            again, follow<br>these steps:
+            <br>
+            <br>
+            Check to make sure any new hardware or software is properly installed.<br>If this is a new installation, ask
+            your hardware or software manufacturer<br>for any Windows updates you might need.
+            <br>
+            <br>
+            If problems continue, disable or remove any newly installed hardware<br>or software. Disable BIOS memory options
+            such as caching or shadowing.<br>If you need to use Safe Mode to remove or disable components, restart<br>your
+            computer, press F8 to select Advanced Startup Options, and then<br>select Safe Mode.
+            <br>
+            <br>
+            Technical information:
+            <br>
+            <br>
+            *** STOP: 0x000000F4 (0x0000000000000003, 0xFFFFFA80018CE7D0, 0xFFFFFA80018CEAB0, 0<br>xFFFFF80002983DB0)
+            <br>
+            <br>
+            <br>
+            <br>
+            Collecting data for crash dump ...
+            <br>
+            Initializing disk for crash dump ...
+            <br>
+            Beginning dump of physical memory.
+            <br>
+            Dumping physical memory to disk: <span id="bsodPc">0</span>
+            <br>
+            Physical memory dump complete.
+            <br>
+            Contact your system admin or technical support group for further assistance
+        </span>
+        <span class="BSODError2 hidden">
+            <br>
+            <br>
+            STOP: c000021a {Fatal System Error}
+            <br>
+            The Windows SubSystem process terminated unexpectedly with a status of 0xc0000005 (0x7e74ae01 0x0053f3c8).
+            <br>
+            The system has been shut down.
+        </span>
+        <span class="BSODError3 hidden">
+            <br>
+            <br>
+            *** STOP: 0x000000F4 (0x0000000000000003, 0xFFFFFA80018CE7D0, 0xFFFFFA80018CEAB0, 0<br>xFFFFF80002983DB0)
+        </span>
+    </span>
+    <span class="fakeCursor hidden"></span>
+    <span class="workingarea" onclick="closeStart()">
+        <span class="desktopIcon">
+            <img src="/resources/windows/Icons/imageres_55.ico" draggable="false" height="48px" width="48px">
+            <span class="text">Recycle Bin</span>
+        </span>
+        <span class="desktopIcon">
+            <img src="/resources/windows/Icons/imageres_109.ico" draggable="false" height="48px" width="48px">
+            <span class="text">Computer</span>
+        </span>
+    </span>
+    <span class="taskbar">
+        <span class="startbutton" onclick="toggleStart()">
+            <span class="startbutton-border"></span>
+        </span>
+        <span class="taskbaricons">
+            <span class="quicklaunch">
+                <span class="quicklaunchapp">
+                    <img draggable="false" src="/resources/windows/AppIcons_PNG/Notepad/32.png"
+                        onclick="window.notepad()">
+                </span>
+            </span>
+        </span>
+        <span class="right">
+            <span class="time">
+                6:07 PM
+            </span>
+            <span class="show-desktop"></span>
+        </span>
+    </span>
+    <span class="startmenu hidden">
+        <span class="startleft">
+            <span class="startapp" onclick="window.notepad(); closeStart()">
+                <img draggable="false" src="/resources/windows/AppIcons_PNG/Notepad/32.png">Notepad
+            </span>
+            <span class="bottom"></span>
+        </span>
+        <span class="startright">
+            <span class="userprofile">
+                <span class="userimage"></span>
+            </span>
+            <span class="startlink" onclick="">Blackcomb Live User</span>
+            <span class="startlink" onclick="">Documents</span>
+            <span class="startlink" onclick="">Pictures</span>
+            <span class="startlink" onclick="">Music</span>
+            <span class="startlink" onclick="">Games</span>
+            <hr>
+            <span class="startlink more" onclick="">Recent Items</span>
+            <span class="startlink" onclick="">Computer</span>
+            <span class="startlink" onclick="">Network</span>
+            <span class="startlink" onclick="">Connect To</span>
+            <hr>
+            <span class="startlink" onclick="">Control Panel</span>
+            <span class="startlink" onclick="">Default Programs</span>
+            <span class="startlink" onclick="">Help and Support</span>
+            <span class="shutdown">
+                <span class="shut">Shut down</span>
+                <span class="more"></span>
+            </span>
+        </span>
+        <span class="startsearch">Search programs and files</span>
+    </span>
+    <span class="build-string">
+        WARNING
+        <br>
+        This is a very early build of Project Blackcomb
+        <br>
+        This project was also designed and developed for Firefox.
+        <br>
+        Things may be broken, unfinished or slightly cursed.
+        <br>
+        Twisty Nado - 2026
+    </span>
+    <script>
+        var canBSOD = false;
+        var startOpen = false;
+        var cursorX = 0;
+        var cursorY = 0;
+
+        function openStart() {
+            startOpen = true;
+            document.querySelector(".startmenu").classList.remove("hidden")
+            document.querySelector(".startbutton").classList.add("active")
+        }
+
+        function closeStart() {
+            startOpen = false;
+            document.querySelector(".startmenu").classList.add("hidden")
+            document.querySelector(".startbutton").classList.remove("active")
+        }
+
+        function toggleStart() {
+            if (startOpen == false) {
+                openStart();
+            } else {
+                closeStart();
+            }
+        }
+
+        function focusbox(id) {
+            id = document.getElementById(id)//.substring(0, id.length - 4));
+            id.winbox.focus()
+            if (id.classList.contains("min")) {
+                id.winbox.restore()
+            }
+        }
+
+        function time() {
+            var c = document.querySelector(".time");
+            var now = new Date();
+
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var ampm = hours >= 12 ? "PM" : "AM";
+
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+
+            var timeString = hours + ":" + minutes + " " + ampm;
+
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var year = now.getFullYear();
+
+            var dateString = month + "/" + day + "/" + year;
+
+            c.innerHTML = timeString + "<br>" + dateString;
+        }
+        setInterval(time, 1000);
+        time();
+
+        function scaleBSOD() {
+            const bsod = document.querySelector('.BSOD');
+
+            const scaleX = window.innerWidth / 656;
+            const scaleY = window.innerHeight / 496;
+
+            bsod.style.transform = `
+                translate(-50%, -50%)
+                scale(${scaleX}, ${scaleY})
+            `;
+        }
+
+        window.addEventListener("resize", scaleBSOD);
+        scaleBSOD();
+        setInterval(() => {
+            scaleBSOD();
+        }, 100);
+
+        function getRandomInt(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+        }
+
+        function updateCursorPos(event) {
+            let x = event.clientX;
+            let y = event.clientY;
+
+            if (document.querySelector(".BSOD").classList.contains("hidden")) {
+                cursorX = x;
+                cursorY = y;
+            }
+        }
+
+        function freezeScreen() {
+            let cursor = document.querySelector(".fakeCursor");
+            document.documentElement.classList.add("frozen");
+
+            cursor.classList.remove("hidden");
+            cursor.style.left = `${cursorX}px`;
+            cursor.style.top = `${cursorY}px`;
+        }
+
+        function BSOD() {
+            if (canBSOD) {
+                canBSOD = false;
+                freezeScreen();
+                setTimeout(() => {
+                    document.querySelector(".BSOD").classList.remove("hidden")
+                    setTimeout(() => {
+                        document.querySelector(".BSOD").classList.remove("black")
+                        const rand = getRandomInt(1,4)
+                        if (rand == 1){
+                            document.querySelector(".BSODError1").classList.remove("hidden")
+                            const bsodPc = document.getElementById("bsodPc");
+                            let current = 0;
+                            const interval = setInterval(() => {
+                                current = Math.min(current + Math.floor(Math.random() * 15) + 1, 100);
+                                bsodPc.textContent = current;
+
+                                if (current >= 100) {
+                                    setTimeout(() => {
+                                        document.querySelector(".BSOD").classList.add("black")
+                                        setTimeout(() => {
+                                            document.location = "/index.html"
+                                        }, 500);
+                                    }, 250);
+                                    clearInterval(interval);
+                                }
+                            }, getRandomInt(100, 500));
+                        } else if (rand == 2) {
+                            document.querySelector(".BSODError2").classList.remove("hidden")
+                        } else if (rand == 3) {
+                            document.querySelector(".BSODError3").classList.remove("hidden")
+                        }
+                    }, 1500);
+                }, 1000);
+            }
+        }
+
+        setInterval(() => {
+            if (document.querySelector(".BSOD").classList.contains("hidden")) {
+                const rand = getRandomInt(0, 100);
+                if (rand == 67) {
+                    BSOD();
+                }
+            }
+        }, 1000);
+
+        const GRID_WIDTH = 77;
+        const GRID_HEIGHT = 98;
+
+        function snapToGridX(value) {
+            return Math.round(value / GRID_WIDTH) * GRID_WIDTH;
+        }
+
+        function snapToGridY(value) {
+            return Math.round(value / GRID_HEIGHT) * GRID_HEIGHT;
+        }
+
+        // Auto-arrange icons in a grid
+        function arrangeIconsInGrid() {
+            const icons = document.getElementsByClassName("desktopIcon");
+            const container = document.querySelector(".workingarea");
+            const containerHeight = container.offsetHeight;
+            
+            let col = 0;
+            let row = 0;
+            const maxRows = Math.floor(containerHeight / GRID_HEIGHT);
+            
+            Array.from(icons).forEach(element => {
+                element.style.left = `${col * GRID_WIDTH}px`;
+                element.style.top = `${row * GRID_HEIGHT}px`;
+                
+                row++;
+                if (row >= maxRows) {
+                    row = 0;
+                    col++;
+                }
+            });
+        }
+
+        window.addEventListener('load', arrangeIconsInGrid);
+
+        const ds = new DragSelect({
+            selectables: document.getElementsByClassName("desktopIcon"),
+            area: document.querySelector(".workingarea"),
+            useTransform: false
+        });
+
+        // Snap after dragging with separate X/Y
+        ds.subscribe('DS:end', ({ items, isDragging }) => {
+            if (!isDragging) return;
+            
+            items.forEach(element => {
+                const currentLeft = parseInt(element.style.left) || 0;
+                const currentTop = parseInt(element.style.top) || 0;
+                
+                element.style.left = `${snapToGridX(currentLeft)}px`;
+                element.style.top = `${snapToGridY(currentTop)}px`;
+            });
+        });
+    </script>
+    <script type="module">
+        import WinBox from "/js/winbox.js";
+
+        window.testApp = function () {
+            WinBox.new({
+                title: "test",
+                x: "center",
+                y: "center",
+                width: 400,
+                height: 300,
+                icon: "/resources/windows/AppIcons/explorer_107.ico",
+                taskbaricon: "/resources/windows/AppIcons/explorer_107.ico",
+                taskbariconcolor: "#33a2f6",
+                //header: 60,
+                class: []
+            })
+        }
+
+        window.notepad = function () {
+
+            const rand = getRandomInt(0, 15);
+            if (rand == 7) {
+                setTimeout(() => {
+                    BSOD();
+                }, getRandomInt(50, 250));
+            }
+
+            WinBox.new({
+                title: "Notepad",
+                x: "center",
+                y: "center",
+                width: 600,
+                height: 400,
+                minwidth: 400,
+                minweight: 200,
+                icon: "/resources/windows/AppIcons_PNG/Notepad/16.png",
+                taskbaricon: "/resources/windows/AppIcons_PNG/Notepad/32.png",
+                taskbariconcolor: "#7ebfcd",
+                html: "<textarea style='width: calc(100% - 0px); height: calc(100% - 0px); outline: none; border: none; resize: none;'></textarea>",
+                //header: 60,
+                class: []
+            })
+        }
+    </script>
+</body>
+
+</html>

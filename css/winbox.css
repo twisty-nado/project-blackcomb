@@ -1,0 +1,719 @@
+@keyframes windowOpen{
+     0%{
+          transform: translate(0, -2px) rotateX(-12.5deg) scale(.92);
+          opacity: 0;
+     }
+}
+
+@keyframes windowClose{
+     65%{
+          opacity: 0;
+     }
+
+     100%{
+          transform: translate(0, 2px) rotateX(12.5deg) rotateY(2deg) scale(.92);
+          opacity: 0;
+     }
+}
+
+.winbox {
+     position: fixed;
+     left: 0;
+     top: 0;
+     background: none;
+     box-shadow: 0 0 0 1px #ffffffe0, 0 0 0 2px #00000077, 0 0 10px 0px #000000cc;
+
+     /*contain: layout size;*/
+
+     text-align: left;
+
+     touch-action: none;
+
+     border-radius: 6px;
+
+     /*transform: perspective(300px);*/
+
+     backdrop-filter: blur(4px) saturate(50%) brightness(80%) contrast(150%);
+
+     user-select: none;
+
+     image-rendering: optimizeSpeed;
+
+     min-width: 160px;
+     min-height: 33px;
+
+}
+
+.wb-reflection{
+     width: 100%;
+     height: 100%;
+     left: 0;
+     top: 0;
+     border-radius: 6px;
+     /* background: var(--glass-effect); */
+     background: linear-gradient(180deg, #ffffff00 10%, #ffffffdf 33%, #ffffff00 34%, #ffffff00 100%);
+     background-repeat: repeat;
+     background-attachment: fixed;
+     background-size: 160%;
+}
+
+.winbox:not(.focus){
+     backdrop-filter: blur(4px) saturate(60%) brightness(100%) contrast(150%);
+     box-shadow: 0 0 0 1px #ffffffe0, 0 0 0 2px #00000077, 0 0 10px 0px #00000080;
+}
+
+.winbox:not(.focus)::before{
+     opacity: var(--inactive-glass-intensity);
+}
+
+.winbox.close{
+     animation: windowClose 0.45s ease-out;
+     pointer-events: none;
+}
+
+.winbox.open{
+     animation: windowOpen 0.4s ease-out;
+     pointer-events: none;
+}
+
+.wb-reflection::before{
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     content: "";
+     left: 0;
+     top: 0;
+     position: absolute;
+     background: url("/resources/smod/decoration/framecornereffect.png") -4px -4px no-repeat;
+     background-size: auto;
+     transform: scaleX(-1);
+     border-radius: 6px;
+}
+
+.wb-reflection::after{
+     width: 100%;
+     height: 100%;
+     z-index: -1;
+     content: "";
+     left: 0;
+     top: 0;
+     position: absolute;
+     background: url("/resources/smod/decoration/framecornereffect.png") -4px -4px no-repeat;
+     background-size: auto;
+     border-radius: 6px;
+}
+
+.winbox::before{
+     width: 100%;
+     height: 100%;
+     z-index: -2;
+     content: "";
+     left: 0;
+     top: 0;
+     position: absolute;
+     background: var(--glass-color);
+     border-radius: 6px;
+     opacity: var(--glass-intensity);
+}
+
+.wb-header {
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 28px;
+     line-height: 28px;
+     color: #000;
+     font-size: 9pt;
+     z-index: 1;
+}
+
+.wb-body {
+     position: absolute;
+     top: 28px;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     overflow: auto;
+     -webkit-overflow-scrolling: touch;
+     overflow-scrolling: touch;
+     will-change: contents;
+     background: #f0f0f0;
+     /* when no border is set there is some thin line visible */
+     /* always hide top border visually */
+     margin-top: 0 !important;
+     margin: 6px;
+     border-radius: 2px;
+     box-shadow: 0 0 0 1px #333333cc, 0 0 0 2px #eeeeee99;
+     contain: strict;
+     z-index: 0;
+     box-sizing: border-box;
+     overflow: hidden;
+}
+
+/* body > .wb-body{
+     position: relative;
+     display: inline-block;
+     visibility: hidden;
+     contain: none;
+}
+ */
+.wb-drag {
+     height: 100%;
+     padding-left: 0;
+}
+
+.wb-title {
+     position: absolute;
+     font-family: "Segoe UI Vista", sans-serif;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     display: block;
+     left: 0px;
+     padding-left: 8px;
+     width: 100%;
+     pointer-events: none;
+     box-sizing: border-box;
+     text-shadow: 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff, 0 0 12px #fff;
+     z-index: 1;
+}
+
+.wb-icon {
+     position: relative;
+     display: none;
+     width: 16px;
+     height: 100%;
+     margin-left: 6px;
+     float: left;
+     background-repeat: no-repeat;
+     background-size: 100%;
+     background-position: center;
+     z-index: 2;
+}
+
+.wb-icon.visible ~ .wb-title{
+     padding-left: 26px;
+}
+
+.winbox.max .wb-icon.visible ~ .wb-title{
+     padding-left: 22px;
+}
+
+.wb-n {
+     position: absolute;
+     top: -5px;
+     left: 0;
+     right: 0;
+     height: 10px;
+     cursor: n-resize;
+     z-index: 2;
+}
+
+.wb-e {
+     position: absolute;
+     top: 0;
+     right: -5px;
+     bottom: 0;
+     width: 10px;
+     cursor: w-resize;
+     z-index: 2;
+}
+
+.wb-s {
+     position: absolute;
+     bottom: -5px;
+     left: 0;
+     right: 0;
+     height: 10px;
+     cursor: n-resize;
+     z-index: 2;
+}
+
+.wb-w {
+     position: absolute;
+     top: 0;
+     left: -5px;
+     bottom: 0;
+     width: 10px;
+     cursor: w-resize;
+     z-index: 2;
+}
+
+.wb-nw {
+     position: absolute;
+     top: -5px;
+     left: -5px;
+     width: 15px;
+     height: 15px;
+     cursor: nw-resize;
+     z-index: 2;
+}
+
+.wb-ne {
+     position: absolute;
+     top: -5px;
+     right: -5px;
+     width: 15px;
+     height: 15px;
+     cursor: ne-resize;
+     z-index: 2;
+}
+
+.wb-sw {
+     position: absolute;
+     bottom: -5px;
+     left: -5px;
+     width: 15px;
+     height: 15px;
+     cursor: ne-resize;
+     z-index: 2;
+}
+
+.wb-se {
+     position: absolute;
+     bottom: -5px;
+     right: -5px;
+     width: 15px;
+     height: 15px;
+     cursor: nw-resize;
+     z-index: 2;
+}
+
+.wb-control {
+     float: right;
+     height: 100%;
+     max-width: 100%;
+     text-align: center;
+     position: relative;
+     top: -1px;
+     line-height: 0;
+}
+
+.wb-control * {
+     display: inline-block;
+     width: 27px;
+     height: 20px;
+     max-width: 100%;
+     background-position: center;
+     background-repeat: no-repeat;
+     position: relative;
+}
+
+.winbox:not(.focus) .wb-min {
+     background: url("/resources/smod/decoration/minimize-unfocus.png") 0 0;
+}
+
+.winbox:not(.focus) .wb-max {
+     background: url("/resources/smod/decoration/maximize-unfocus.png") 0 0;
+}
+
+.winbox:not(.focus) .wb-close {
+     background: url("/resources/smod/decoration/close-unfocus.png") 0 0;
+}
+
+.wb-min:hover {
+     background: url("/resources/smod/decoration/minimize-hover.png") 0 0 !important;
+}
+
+.wb-max:hover {
+     background: url("/resources/smod/decoration/maximize-hover.png") 0 0 !important;
+}
+
+.wb-close:hover {
+     background: url("/resources/smod/decoration/close-hover.png") 0 0 !important;
+}
+
+.wb-min:active {
+     background: url("/resources/smod/decoration/minimize-active.png") 0 0 !important;
+}
+
+.wb-max:active {
+     background: url("/resources/smod/decoration/maximize-active.png") 0 0 !important;
+}
+
+.wb-close:active {
+     background: url("/resources/smod/decoration/close-active.png") 0 0 !important;
+}
+
+.wb-close::after, .wb-close::after{
+     width: 68px;
+     height: 37px;
+     content: "";
+     position: absolute;
+     left: -10px;
+     top: -9px;
+     background: url("/resources/smod/decoration/close-glow.png");
+     background-size: 100% 100%;
+     z-index: 4;
+     pointer-events: none;
+     opacity: 0;
+     transition: 0.2s;
+}
+
+.wb-max::after, .wb-max::after{
+     width: 47px;
+     height: 37px;
+     content: "";
+     position: absolute;
+     left: -10px;
+     top: -9px;
+     background: url("/resources/smod/decoration/maximize-glow.png");
+     background-size: 100% 100%;
+     z-index: 4;
+     pointer-events: none;
+     opacity: 0;
+     transition: 0.2s;
+}
+
+.wb-min::after, .wb-min::after{
+     width: 49px;
+     height: 37px;
+     content: "";
+     position: absolute;
+     left: -10px;
+     top: -9px;
+     background: url("/resources/smod/decoration/minimize-glow.png");
+     background-size: 100% 100%;
+     z-index: 4;
+     pointer-events: none;
+     opacity: 0;
+     transition: 0.2s;
+}
+
+.wb-close:hover::after, .wb-close:active::after{
+     opacity: 1;
+}
+
+.wb-max:hover::after, .wb-max:active::after, .wb-min:hover::after, .wb-min:active::after{
+     opacity: 1;
+}
+
+.wb-min {
+     background: url("/resources/smod/decoration/minimize.png") 0 0;
+     width: 29px;
+}
+
+.wb-max {
+     background: url("/resources/smod/decoration/maximize.png") 0 0;
+}
+
+.wb-close {
+     background: url("/resources/smod/decoration/close.png") 0 0;
+     width: 49px;
+     margin-right: 4px;
+}
+
+.wb-min::before{
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     content: "";
+     background: url("/resources/smod/decoration/minimize-active-glyph.png") no-repeat 10px 4px;
+}
+
+.wb-max::before{
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     content: "";
+     background: url("/resources/smod/decoration/maximize-active-glyph.png") no-repeat 7px 4px;
+}
+
+.wb-close::before{
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     content: "";
+     background: url("/resources/smod/decoration/close-active-glyph.png") no-repeat 19px 4px;
+}
+
+.wb-full {
+     background-image: url("../img/full.svg");
+     background-size: 16px auto;
+}
+
+/* .winbox:not(.max) .wb-max {
+     background-image: url(@restore);
+     background-size: 20px auto;
+     background-position: center bottom 5px;
+}
+ */
+/* .winbox:fullscreen{
+     transition: none !important;
+}
+ .winbox:fullscreen .wb-full{
+     background-image: url(@minimize);
+}
+ .winbox:fullscreen > div, .winbox:fullscreen .wb-title, */
+.winbox.modal .wb-body~div,
+.winbox.modal .wb-drag,
+.winbox.min .wb-body~div,
+.winbox.max .wb-body~div {
+     pointer-events: none;
+}
+
+.winbox.max .wb-drag {
+     
+}
+
+.winbox.min .wb-full,
+.winbox.min .wb-min {
+     display: none;
+}
+
+.winbox.min .wb-drag {
+     
+}
+
+.winbox.min{
+     display: none;
+}
+
+.winbox.min .wb-body>* {
+     display: none;
+}
+
+.winbox.hide {
+     display: none;
+}
+
+.winbox.max {
+     box-shadow: none;
+     border-radius: 0;
+     /* backdrop-filter: brightness(0); */
+     /* box-shadow: 0 30px 0 #444; */
+}
+
+.winbox.max .wb-close{
+     margin-right: 2px;
+}
+
+.winbox.max::before, .winbox.max::after{
+     border-radius: 0;
+}
+
+.winbox.max .wb-max::before{
+     background: url("/resources/smod/decoration/restore-active-glyph.png") no-repeat 7px 3px;
+}
+
+.winbox.max .wb-body {
+     margin: 0;
+     top: 21px;
+     border-radius: 0;
+     box-shadow: 0 -1px 0 0 #eeeeee99, 0 1px 0 0 inset #333333cc;
+}
+
+.winbox.max .wb-header{
+     height: 21px;
+     line-height: 21px;
+}
+
+.winbox.max .wb-icon{
+     margin-left: 2px;
+}
+
+.winbox iframe {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     border: 0;
+}
+
+body.wb-lock .winbox {
+     will-change: left, top, width, height;
+     /*transition: none;*/
+}
+
+body.wb-lock iframe {
+     pointer-events: none;
+}
+
+.winbox.modal:before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background: inherit;
+     border-radius: inherit;
+}
+
+.winbox.modal:after {
+     content: '';
+     position: absolute;
+     top: -50vh;
+     left: -50vw;
+     right: -50vw;
+     bottom: -50vh;
+     background: #0d1117;
+     animation: wb-fade-in 0.2s ease-out forwards;
+     z-index: -1;
+}
+
+.winbox.modal .wb-min,
+.winbox.modal .wb-max,
+.winbox.modal .wb-full {
+     display: none;
+}
+
+@keyframes wb-fade-in {
+     0% {
+          opacity: 0;
+     }
+
+     100% {
+          opacity: 0.85;
+     }
+}
+
+.blur-behind .wb-body{
+     background: transparent !important;
+     box-shadow: none !important;
+}
+
+.dis-max .wb-max{
+     pointer-events: none;
+}
+
+.dis-max .wb-max::before{
+     opacity: 0.67;
+}
+
+.dis-min .wb-min{
+     pointer-events: none;
+}
+
+.dis-min .wb-min::before{
+     opacity: 0.67;
+}
+
+.dis-close .wb-close{
+     background: url("/resources/smod/decoration/close-notresponding.png") 0 0;
+     pointer-events: none;
+}
+
+.dis-close .wb-close::before{
+     opacity: 0.67;
+}
+
+.dis-close.no-max.no-min .wb-close{
+     background: url("/resources/smod/decoration/close-single-notresponding.png") 0 0;
+}
+
+.no-max.no-min .wb-close:hover {
+     background: url("/resources/smod/decoration/close-single-hover.png") 0 0 !important;
+}
+
+.no-max.no-min .wb-close:active {
+     background: url("/resources/smod/decoration/close-single-active.png") 0 0 !important;
+}
+
+.no-max.no-min .wb-close {
+     background: url("/resources/smod/decoration/close-single.png") 0 0;
+}
+
+.no-max.no-min:not(.focus) .wb-close {
+     background: url("/resources/smod/decoration/close-single-unfocus.png") 0 0;
+}
+
+.no-anim{
+     animation: none !important;
+}
+
+.no-frame::before, .no-frame::after, .no-frame .wb-reflection{
+     display: none;
+}
+
+.no-frame{
+     backdrop-filter: none !important;
+     box-shadow: none !important;
+     background: none !important;
+}
+
+.no-frame .wb-body{
+     margin: 0 !important;
+     top: 0 !important;
+     box-shadow: none !important;
+     border-radius: 0 !important;
+}
+
+.no-titlebar .wb-header{
+     display: none;
+}
+
+.no-top .wb-body{
+     top: 0;
+     margin: 4px !important
+}
+
+.no-animation {
+     transition: none;
+}
+
+.no-shadow {
+     box-shadow: none;
+}
+
+.no-header .wb-header {
+     display: none;
+}
+
+.no-header .wb-body {
+     top: 0;
+}
+
+.no-min .wb-min {
+     display: none;
+}
+
+.no-max .wb-max {
+     display: none;
+}
+
+.no-full .wb-full {
+     display: none;
+}
+
+.no-close .wb-close {
+     display: none;
+}
+
+.no-resize .wb-body~div {
+     display: none;
+}
+
+.no-move:not(.min) .wb-title {
+     pointer-events: none;
+}
+
+.wb-body .wb-hide {
+     display: none;
+}
+
+.wb-show {
+     display: none;
+}
+
+.wb-body .wb-show {
+     display: revert;
+}
+
+.keep-title-height .wb-title{
+     line-height: 28px !important;
+}
+
+.keep-title-height.max .wb-title{
+     line-height: 21px !important;
+}
+
+.thick-borders .wb-body{
+     margin: 8px
+}

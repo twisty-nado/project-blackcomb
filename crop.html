@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vista but Cropped</title>
+    <style>
+        body {
+            background: #000;
+        }
+
+        iframe {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: solid 1px #fff;
+            background: #000;
+            width: 1024px;
+            height: 768px;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe src="index.html" id="my-iframe"></iframe>
+</body>
+
+</html>
