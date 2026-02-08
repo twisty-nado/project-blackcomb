@@ -488,7 +488,7 @@
                 taskbariconcolor: "#e4feff",
                 mount: document.querySelector(".wallpaperApp").cloneNode(true),
                 //header: 60,
-                class: ["dis-max", "no-resize", "blur-behind", "no-title", "no-top"]
+                class: ["dis-max", "no-resize", "blur-behind", "full-drag", "no-title", "no-top", "no-margin"]
             });
 
             setTimeout(() => {
@@ -743,21 +743,26 @@
 
     <span class="backstore hidden">
         <span class="wallpaperApp">
-            <h2>Change your wallpaper</h2>
-            <p>Use this utility to change your user desktop background</p>
-            <span class="wallpapers">
-                <!--
-                <span class="section">
-                    <hr>
-                    <h2>Windows</h2>
-                    <button class="wallpaper" onclick="changeWallpaper('/Windows/img0.jpg')">
-                        <img src="/resources/wallpapers/Windows/img0.jpg" width="128">
-                        <span>img0.jpg</span>
-                    </button>
+            <span class="title">
+                <span class="title_2">
+                    <h2>Change your wallpaper</h2>
+                    <p>Use this utility to change your user desktop background</p>
                 </span>
-                -->
             </span>
-            <hr>
+            <span class="wallpapers-container">
+                <span class="wallpapers">
+                    <!--
+                    <span class="section">
+                        <hr>
+                        <h2>Windows</h2>
+                        <button class="wallpaper" onclick="changeWallpaper('/Windows/img0.jpg')">
+                            <img src="/resources/wallpapers/Windows/img0.jpg" width="128">
+                            <span>img0.jpg</span>
+                        </button>
+                    </span>
+                    -->
+                </span>
+            </span>
         </span>
     </span>
 </body>
