@@ -514,7 +514,7 @@
     height: 100%;
     width: 52px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(30, 30, 30, 0) 50.01%, rgba(255, 255, 255, 0.05) 100%);
-    box-shadow: 0 0 0 1px #00000099 inset, 0 0 0 2px #ffffff70 inset;
+    box-shadow: 0 0 0 1px #00000099 inset, 0 0 0 2px #ffffff60 inset;
     z-index: 2;
 }
 
