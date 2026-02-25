@@ -1,18 +1,46 @@
-@keyframes windowOpen{
-     0%{
+@keyframes windowOpen {
+     0% {
           transform: translate(0, -2px) rotateX(-12.5deg) scale(.92);
           opacity: 0;
      }
 }
 
-@keyframes windowClose{
-     60%{
+@keyframes windowClose {
+     60% {
           opacity: 0;
      }
 
-     100%{
+     100% {
           transform: translate(0, 2px) rotateX(12.5deg) rotateY(2deg) scale(.92);
           opacity: 0;
+     }
+}
+
+@keyframes windowMin {
+     from {
+          transform: scale(1);
+          opacity: 1;
+     }
+
+     to {
+          transform: perspective(500px) rotateX(50deg) rotateY(2deg) scale(0.5) translateZ(-10px) translate(-50%, -50%);
+          top: calc(100% - 160px);
+          left: 120px;
+          opacity: 0;
+     }
+}
+
+@keyframes windowRes {
+     from {
+          transform: perspective(500px) rotateX(50deg) rotateY(2deg) scale(0.5) translateZ(-10px) translate(-50%, -50%);
+          top: calc(100% - 160px);
+          left: 120px;
+          opacity: 0;
+     }
+
+     to {
+          transform: scale(1);
+          opacity: 1;
      }
 }
 
@@ -44,11 +72,22 @@
 
 }
 
-.winbox.brighter{
+.winbox.min-anim {
+     animation: windowMin 0.5s ease-out !important;
+     transform-origin: bottom left;
+     pointer-events: none;
+}
+
+.winbox.res-anim {
+     animation: windowRes 0.5s ease-out !important;
+     pointer-events: none;
+}
+
+.winbox.brighter {
      backdrop-filter: blur(4px) saturate(50%) brightness(100%) contrast(150%);
 }
 
-.wb-reflection{
+.wb-reflection {
      position: absolute;
      width: 100%;
      height: 100%;
@@ -61,11 +100,13 @@
      background-size: 160%;
 }
 
-.winbox.no-glow .wb-reflection, .winbox.no-glow .wb-reflection::before, .winbox.no-glow .wb-reflection::after{
+.winbox.no-glow .wb-reflection,
+.winbox.no-glow .wb-reflection::before,
+.winbox.no-glow .wb-reflection::after {
      background: none;
 }
 
-.wb-glass{
+.wb-glass {
      position: absolute;
      width: 100%;
      height: 100%;
@@ -79,26 +120,26 @@
      opacity: 0.3;
 }
 
-.winbox:not(.focus){
+.winbox:not(.focus) {
      backdrop-filter: blur(4px) saturate(60%) brightness(100%) contrast(150%);
      box-shadow: 0 0 0 1px #ffffffe0, 0 0 0 2px #00000077, 0 0 10px 0px #00000080;
 }
 
-.winbox:not(.focus)::before{
+.winbox:not(.focus)::before {
      opacity: var(--inactive-glass-intensity);
 }
 
-.winbox.close{
+.winbox.close {
      animation: windowClose 0.45s ease-out;
      pointer-events: none;
 }
 
-.winbox.open{
+.winbox.open {
      animation: windowOpen 0.4s ease-out;
      pointer-events: none;
 }
 
-.wb-reflection::before{
+.wb-reflection::before {
      width: 100%;
      height: 100%;
      z-index: -1;
@@ -112,7 +153,7 @@
      border-radius: 6px;
 }
 
-.wb-reflection::after{
+.wb-reflection::after {
      width: 100%;
      height: 100%;
      z-index: -1;
@@ -125,11 +166,12 @@
      border-radius: 6px;
 }
 
-.winbox:not(.focus) .wb-reflection::before, .winbox:not(.focus) .wb-reflection::after{
+.winbox:not(.focus) .wb-reflection::before,
+.winbox:not(.focus) .wb-reflection::after {
      opacity: 0.8;
 }
 
-.winbox::before{
+.winbox::before {
      width: 100%;
      height: 100%;
      z-index: -2;
@@ -204,7 +246,7 @@
      z-index: 1;
 }
 
-.no-title .wb-title{
+.no-title .wb-title {
      visibility: hidden;
 }
 
@@ -221,15 +263,15 @@
      z-index: 2;
 }
 
-.wb-icon.visible ~ .wb-title{
+.wb-icon.visible~.wb-title {
      padding-left: 26px;
 }
 
-.winbox.max .wb-icon.visible ~ .wb-title{
+.winbox.max .wb-icon.visible~.wb-title {
      padding-left: 22px;
 }
 
-.winbox.max .wb-icon{
+.winbox.max .wb-icon {
      height: 22px;
 }
 
@@ -369,7 +411,8 @@
      background: url("/resources/smod/decoration/close-active.png") 0 0 !important;
 }
 
-.wb-close::after, .wb-close::after{
+.wb-close::after,
+.wb-close::after {
      width: 68px;
      height: 37px;
      content: "";
@@ -384,7 +427,8 @@
      transition: 0.2s;
 }
 
-.wb-max::after, .wb-max::after{
+.wb-max::after,
+.wb-max::after {
      width: 47px;
      height: 37px;
      content: "";
@@ -399,7 +443,8 @@
      transition: 0.2s;
 }
 
-.wb-min::after, .wb-min::after{
+.wb-min::after,
+.wb-min::after {
      width: 49px;
      height: 37px;
      content: "";
@@ -414,11 +459,15 @@
      transition: 0.2s;
 }
 
-.wb-close:hover::after, .wb-close:active::after{
+.wb-close:hover::after,
+.wb-close:active::after {
      opacity: 1;
 }
 
-.wb-max:hover::after, .wb-max:active::after, .wb-min:hover::after, .wb-min:active::after{
+.wb-max:hover::after,
+.wb-max:active::after,
+.wb-min:hover::after,
+.wb-min:active::after {
      opacity: 1;
 }
 
@@ -437,7 +486,7 @@
      margin-right: 4px;
 }
 
-.wb-min::before{
+.wb-min::before {
      position: absolute;
      left: 0;
      top: 0;
@@ -447,7 +496,7 @@
      background: url("/resources/smod/decoration/minimize-active-glyph.png") no-repeat 10px 4px;
 }
 
-.wb-max::before{
+.wb-max::before {
      position: absolute;
      left: 0;
      top: 0;
@@ -457,7 +506,7 @@
      background: url("/resources/smod/decoration/maximize-active-glyph.png") no-repeat 7px 4px;
 }
 
-.wb-close::before{
+.wb-close::before {
      position: absolute;
      left: 0;
      top: 0;
@@ -492,20 +541,16 @@
      pointer-events: none;
 }
 
-.winbox.max .wb-drag {
-     
-}
+.winbox.max .wb-drag {}
 
 .winbox.min .wb-full,
 .winbox.min .wb-min {
      display: none;
 }
 
-.winbox.min .wb-drag {
-     
-}
+.winbox.min .wb-drag {}
 
-.winbox.min{
+.winbox.min {
      display: none;
 }
 
@@ -524,15 +569,16 @@
      /* box-shadow: 0 30px 0 #444; */
 }
 
-.winbox.max .wb-close{
+.winbox.max .wb-close {
      margin-right: 2px;
 }
 
-.winbox.max::before, .winbox.max::after{
+.winbox.max::before,
+.winbox.max::after {
      border-radius: 0;
 }
 
-.winbox.max .wb-max::before{
+.winbox.max .wb-max::before {
      background: url("/resources/smod/decoration/restore-active-glyph.png") no-repeat 7px 3px;
 }
 
@@ -543,12 +589,12 @@
      box-shadow: 0 -1px 0 0 #eeeeee99, 0 1px 0 0 inset #333333cc;
 }
 
-.winbox.max .wb-header{
+.winbox.max .wb-header {
      height: 21px;
      line-height: 21px;
 }
 
-.winbox.max .wb-icon{
+.winbox.max .wb-icon {
      margin-left: 2px;
 }
 
@@ -607,37 +653,37 @@ body.wb-lock iframe {
      }
 }
 
-.blur-behind .wb-body{
+.blur-behind .wb-body {
      background: transparent !important;
      box-shadow: none !important;
 }
 
-.dis-max .wb-max{
+.dis-max .wb-max {
      pointer-events: none;
 }
 
-.dis-max .wb-max::before{
+.dis-max .wb-max::before {
      opacity: 0.67;
 }
 
-.dis-min .wb-min{
+.dis-min .wb-min {
      pointer-events: none;
 }
 
-.dis-min .wb-min::before{
+.dis-min .wb-min::before {
      opacity: 0.67;
 }
 
-.dis-close .wb-close{
+.dis-close .wb-close {
      background: url("/resources/smod/decoration/close-notresponding.png") 0 0;
      pointer-events: none;
 }
 
-.dis-close .wb-close::before{
+.dis-close .wb-close::before {
      opacity: 0.67;
 }
 
-.dis-close.no-max.no-min .wb-close{
+.dis-close.no-max.no-min .wb-close {
      background: url("/resources/smod/decoration/close-single-notresponding.png") 0 0;
 }
 
@@ -657,32 +703,34 @@ body.wb-lock iframe {
      background: url("/resources/smod/decoration/close-single-unfocus.png") 0 0;
 }
 
-.no-anim{
+.no-anim {
      animation: none !important;
 }
 
-.no-frame::before, .no-frame::after, .no-frame .wb-reflection{
+.no-frame::before,
+.no-frame::after,
+.no-frame .wb-reflection {
      display: none;
 }
 
-.no-frame{
+.no-frame {
      backdrop-filter: none !important;
      box-shadow: none !important;
      background: none !important;
 }
 
-.no-frame .wb-body{
+.no-frame .wb-body {
      margin: 0 !important;
      top: 0 !important;
      box-shadow: none !important;
      border-radius: 0 !important;
 }
 
-.no-titlebar .wb-header{
+.no-titlebar .wb-header {
      display: none;
 }
 
-.no-top .wb-body{
+.no-top .wb-body {
      top: 0;
      margin: 6px !important
 }
@@ -739,22 +787,22 @@ body.wb-lock iframe {
      display: revert;
 }
 
-.keep-title-height .wb-title{
+.keep-title-height .wb-title {
      line-height: 28px !important;
 }
 
-.keep-title-height.max .wb-title{
+.keep-title-height.max .wb-title {
      line-height: 21px !important;
 }
 
-.thick-borders .wb-body{
+.thick-borders .wb-body {
      margin: 8px
 }
 
-.full-drag .wb-drag{
+.full-drag .wb-drag {
      height: 80px;
 }
 
-.no-margin .wb-body{
+.no-margin .wb-body {
      margin: 0px !important
 }
