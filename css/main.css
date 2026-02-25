@@ -200,8 +200,7 @@
 }
 
 .startbutton.active.startbutton::before{
-    opacity: 0;
-    transition: none;
+    visibility: hidden;
 }
 
 .startbutton::before{
@@ -310,7 +309,7 @@
     left: 0;
     top: 0;
     background: rgba(0, 0, 0, 0.10) linear-gradient(180deg, transparent, #00000077 40%, transparent);
-    box-shadow: 0 0 0 1px #000000c0 inset, 0 0 0 2px #ffffff50 inset;
+    box-shadow: 0 0 0 1px #000000c0 inset, 0 0 0 2px #ffffff6a inset;
     border-radius: 6px 6px 0 0;
 }
 
@@ -812,8 +811,14 @@
     background: #fff;
     box-shadow: 0 0 0 1px #333333cc, 0 0 0 2px #eeeeee99;
     */
-    overflow-y: scroll;
     box-sizing: border-box;
+}
+
+.winbox.max .wallpaperApp .wallpapers-container{
+    margin: -24px;
+    margin-top: 2px;
+    box-shadow: 0 -1px 0 #333333cc, 0 -2px 0 #eeeeee99;
+    border-radius: 0;
 }
 
 .wallpaperApp .wallpapers-container{
@@ -963,7 +968,6 @@ body{
     background: #000 var(--wallpaper) center center no-repeat;
     background-size: cover;
     color: #282828;
-    transition: background 1s linear;
 }
 
 .hidden{
