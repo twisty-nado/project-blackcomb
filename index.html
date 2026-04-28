@@ -118,23 +118,33 @@
                 <img draggable="false" src="/resources/windows/AppIcons_PNG/Notepad/32.png">Notepad
             </span>
             <span class="bottom"></span>
+
+            <span class="startapp" onclick="window.explorer(); closeStart()">
+                <img draggable="false" src="/resources/windows/AppIcons_PNG/Explorer/32.png">Explorer
+            </span>
+            <span class="bottom"></span>
+
+            <span class="startapp" onclick="window.winver(); closeStart()">
+                <img draggable="false" src="/resources/windows/AppIcons_PNG/Winver/32.png">Winver
+            </span>
+            <span class="bottom"></span>
         </span>
         <span class="startright">
             <span class="userprofile">
                 <span class="userimage"></span>
             </span>
-            <span class="startlink" onclick="">Blackcomb Live User</span>
-            <span class="startlink" onclick="">Documents</span>
-            <span class="startlink" onclick="">Pictures</span>
-            <span class="startlink" onclick="">Music</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'C:/Users/%currentuser/';">Blackcomb Live User</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'C:/Users/%currentuser/Documents/';">Documents</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'C:/Users/%currentuser/Pictures/';">Pictures</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'C:/Users/%currentuser/Music/';">Music</span>
             <hr>
-            <span class="startlink" onclick="">Games</span>
-            <span class="startlink" onclick="">Computer</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'shell:games';">Games</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'C:/Users/%currentuser/';">Computer</span>
             <hr>
-            <span class="startlink" onclick="">Control Panel</span>
-            <span class="startlink" onclick="">Devices and Printers</span>
-            <span class="startlink" onclick="">Default Programs</span>
-            <span class="startlink" onclick="">Help and Support</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'control';">Control Panel</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'control --page=devicesandprinters';">Devices and Printers</span>
+            <span class="startlink" onclick="windows.explorer(); let args = 'control --page=defaultprograms';">Default Programs</span>
+            <span class="startlink" onclick="windows.helpandsupport();">Help and Support</span>
             <span class="shutdown">
                 <span class="shut">Shut down</span>
                 <span class="more"></span>
@@ -146,7 +156,7 @@
         <b>
             ----------------------------------------------------------------
             <br>
-            <span style="margin-right: 138px;">WARNING</span>
+            <span style="margin-right: 138px;">WARNING</span> <!-- still off centered :trol: -->
             <br>
             ----------------------------------------------------------------
         </b>
@@ -440,6 +450,7 @@
             })
         }
 
+        // notepad
         window.notepad = function () {
 
             const rand = getRandomInt(0, 15);
@@ -466,6 +477,60 @@
             })
         }
 
+        // explorer
+        window.explorer = function () {
+
+            const rand = getRandomInt(0, 15);
+            if (rand == 7) {
+                setTimeout(() => {
+                    BSOD();
+                }, getRandomInt(50, 250));
+            }
+
+            WinBox.new({
+                title: "Explorer",
+                x: "center",
+                y: "center",
+                width: 600,
+                height: 400,
+                minwidth: 400,
+                minweight: 200,
+                icon: "/resources/windows/AppIcons_PNG/Explorer/16.png",
+                taskbaricon: "/resources/windows/AppIcons_PNG/Explorer/32.png",
+                taskbariconcolor: "#7ebfcd",
+                html: "<div class='wb-icon visible' style='background-image: url(&quot;/resources/windows/Icons_7/imageres_109.ico&quot;); display: inline-block;'></div><span class='startsearch'>My Computer</span>span class='startsearch'>Search My Computer</span>Folders (6) -- <br>Desktop Documents Downloads<br>Music Pictures Videos<br><br>Devices and drives(2)<br> Local Disc (C:) 29.4 GB free of 59.3 GB - DVD Drive (D:)<textarea style='width: calc(100% - 0px); height: calc(100% - 2px); outline: none; border: none; resize: none;'></textarea><hr>8 items",
+                //header: 60,
+                class: []
+            })
+        }
+
+        // winver
+        window.winver = function () {
+
+            const rand = getRandomInt(0, 15);
+            if (rand == 7) {
+                setTimeout(() => {
+                    BSOD();
+                }, getRandomInt(50, 250));
+            }
+
+            WinBox.new({
+                title: "About Blackcomb",
+                x: "center",
+                y: "center",
+                width: 600,
+                height: 400,
+                minwidth: 400,
+                minweight: 200,
+                icon: "/resources/windows/AppIcons_PNG/Explorer/16.png", // usually has none but whatever
+                taskbaricon: "/resources/windows/AppIcons_PNG/Explorer/32.png",
+                taskbariconcolor: "#7ebfcd",
+                html: "So epic",
+                //header: 60,
+                class: []
+            })
+        }
+        
         window.wallpaper = function () {
 
             const rand = getRandomInt(0, 15);
